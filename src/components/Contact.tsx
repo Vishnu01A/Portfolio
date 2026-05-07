@@ -79,107 +79,86 @@ export default function Contact() {
       >
         <div
           style={{
-            padding: "2rem",
-            borderRadius: "16px",
+            padding: "1.5rem",
+            borderRadius: "12px",
             backgroundColor: "var(--surface)",
             border: "1px solid var(--border)",
           }}
         >
-          <h3
+          <div
             style={{
-              fontSize: "0.85rem",
+              fontSize: "0.75rem",
               fontWeight: "600",
               letterSpacing: "0.08em",
               color: "var(--text-muted)",
-              marginBottom: "1.25rem",
+              marginBottom: "1rem",
             }}
           >
-            SEND A MESSAGE
-          </h3>
-
+            FIND ME ON
+          </div>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: "0.75rem",
-              marginBottom: "1.25rem",
+              gap: "0.5rem",
             }}
           >
-            {(["Name", "Email"] as const).map((field) => (
-              <input
-                key={field}
-                type={field === "Email" ? "email" : "text"}
-                placeholder={field}
+            {socials.map((s) => (
+              <a
+                key={s.name}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
-                  width: "100%",
-                  padding: "0.65rem 0.875rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "0.6rem 0.75rem",
                   borderRadius: "8px",
-                  border: "1px solid var(--border)",
-                  backgroundColor: "var(--bg)",
-                  color: "var(--text-primary)",
-                  fontSize: "0.875rem",
-                  outline: "none",
-                  transition: "border-color 0.2s",
+                  textDecoration: "none",
+                  color: "var(--text-secondary)",
+                  transition: "all 0.2s ease",
                 }}
-                onFocus={(e) => {
-                  (e.target as HTMLElement).style.borderColor = "var(--accent)";
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor =
+                    "var(--surface-hover)";
+                  (e.currentTarget as HTMLElement).style.color =
+                    "var(--text-primary)";
                 }}
-                onBlur={(e) => {
-                  (e.target as HTMLElement).style.borderColor = "var(--border)";
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor =
+                    "transparent";
+                  (e.currentTarget as HTMLElement).style.color =
+                    "var(--text-secondary)";
                 }}
-              />
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.75rem",
+                  }}
+                >
+                  {s.svg && (
+                    <img
+                      src={s.svg}
+                      alt={s.name}
+                      style={{ width: "1.5rem", height: "1.5rem" }}
+                    />
+                  )}
+                  <span style={{ fontSize: "0.875rem", fontWeight: "500" }}>
+                    {s.name}
+                  </span>
+                </div>
+                <span
+                  style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}
+                >
+                  {s.handle}
+                </span>
+              </a>
             ))}
-            <textarea
-              placeholder="Your message..."
-              rows={4}
-              style={{
-                width: "100%",
-                padding: "0.65rem 0.875rem",
-                borderRadius: "8px",
-                border: "1px solid var(--border)",
-                backgroundColor: "var(--bg)",
-                color: "var(--text-primary)",
-                fontSize: "0.875rem",
-                outline: "none",
-                resize: "vertical",
-                fontFamily: "inherit",
-                transition: "border-color 0.2s",
-              }}
-              onFocus={(e) => {
-                (e.target as HTMLElement).style.borderColor = "var(--accent)";
-              }}
-              onBlur={(e) => {
-                (e.target as HTMLElement).style.borderColor = "var(--border)";
-              }}
-            />
           </div>
-
-          <button
-            onClick={() => {}}
-            style={{
-              width: "100%",
-              padding: "0.75rem",
-              borderRadius: "8px",
-              border: "none",
-              backgroundColor: "var(--text-primary)",
-              color: "var(--bg)",
-              fontSize: "0.875rem",
-              fontWeight: "600",
-              cursor: "pointer",
-              transition: "opacity 0.2s",
-              fontFamily: "inherit",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.opacity = "0.8";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.opacity = "1";
-            }}
-          >
-            Send message →
-          </button>
         </div>
-
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <div
             style={{
@@ -229,89 +208,6 @@ export default function Contact() {
             >
               {copied ? "✓ Copied!" : "Copy"}
             </button>
-          </div>
-
-          <div
-            style={{
-              padding: "1.5rem",
-              borderRadius: "12px",
-              backgroundColor: "var(--surface)",
-              border: "1px solid var(--border)",
-            }}
-          >
-            <div
-              style={{
-                fontSize: "0.75rem",
-                fontWeight: "600",
-                letterSpacing: "0.08em",
-                color: "var(--text-muted)",
-                marginBottom: "1rem",
-              }}
-            >
-              FIND ME ON
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.5rem",
-              }}
-            >
-              {socials.map((s) => (
-                <a
-                  key={s.name}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "0.6rem 0.75rem",
-                    borderRadius: "8px",
-                    textDecoration: "none",
-                    color: "var(--text-secondary)",
-                    transition: "all 0.2s ease",
-                  }}
-                  onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.backgroundColor =
-                      "var(--surface-hover)";
-                    (e.currentTarget as HTMLElement).style.color =
-                      "var(--text-primary)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.backgroundColor =
-                      "transparent";
-                    (e.currentTarget as HTMLElement).style.color =
-                      "var(--text-secondary)";
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.75rem",
-                    }}
-                  >
-                    {s.svg && (
-                      <img
-                        src={s.svg}
-                        alt={s.name}
-                        style={{ width: "1.5rem", height: "1.5rem" }}
-                      />
-                    )}
-                    <span style={{ fontSize: "0.875rem", fontWeight: "500" }}>
-                      {s.name}
-                    </span>
-                  </div>
-                  <span
-                    style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}
-                  >
-                    {s.handle}
-                  </span>
-                </a>
-              ))}
-            </div>
           </div>
 
           <div
